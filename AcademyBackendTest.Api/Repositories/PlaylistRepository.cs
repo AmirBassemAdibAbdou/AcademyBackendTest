@@ -24,4 +24,17 @@ public class PlaylistRepository : IPlaylistRepository
             .Where(p => p.UserId == userId)
             .ToListAsync();
     }
+
+    public async Task<Playlist?> GetByIdAsync(Guid id)
+    {
+        return await _context.Playlists
+            .Include(p => p.Songs)
+            .FirstOrDefaultAsync(p => p.Id == id);
+    }
+
+    public async Task UpdateAsync(Playlist playlist)
+    {
+        _context.Playlists.Update(playlist);
+        await _context.SaveChangesAsync();
+    }
 }

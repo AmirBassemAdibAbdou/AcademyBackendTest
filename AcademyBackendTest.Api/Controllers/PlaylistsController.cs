@@ -25,4 +25,17 @@ public class PlaylistsController : ControllerBase
         var result = await _service.GetUserPlaylistsAsync(userId);
         return Ok(result);
     }
+    [HttpPost("{playlistId}/songs")]
+    public async Task<IActionResult> AddSongToPlaylist(Guid playlistId, [FromBody] AddSongDto dto)
+    {
+        var result = await _service.AddSongToPlaylistAsync(playlistId, dto);
+        
+        if (result == null)
+        {
+            // Returns 404 if playlist doesn't exist or user doesn't own it
+            return NotFound("Playlist not found or access denied."); 
+        }
+
+        return Ok(result);
+    }
 }
