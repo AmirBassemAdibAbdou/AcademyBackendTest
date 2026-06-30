@@ -38,4 +38,29 @@ public class PlaylistsController : ControllerBase
 
         return Ok(result);
     }
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdatePlaylist(Guid id, [FromBody] UpdatePlaylistDto dto)
+    {
+        var success = await _service.UpdatePlaylistAsync(id, dto);
+        
+        if (!success)
+        {
+            return NotFound("Playlist not found or access denied.");
+        }
+
+        return NoContent(); // Standard HTTP 204 response for a successful update
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeletePlaylist(Guid id, [FromQuery] string userId)
+    {
+        var success = await _service.DeletePlaylistAsync(id, userId);
+        
+        if (!success)
+        {
+            return NotFound("Playlist not found or access denied.");
+        }
+
+        return NoContent(); // Standard HTTP 204 response for a successful deletion
+    }
 }

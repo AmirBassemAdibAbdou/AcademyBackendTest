@@ -56,4 +56,30 @@ public class PlaylistService : IPlaylistService
 
         return new SongResponseDto(song.Id, song.Title, song.Artist);
     }
+    public async Task<bool> UpdatePlaylistAsync(Guid id, UpdatePlaylistDto dto)
+    {
+        var playlist = await _repository.GetByIdAsync(id);
+        
+        if (playlist == null || playlist.UserId != dto.UserId)
+        {
+            return false;
+        }
+
+        playlist.Name = dto.Name;
+        await _repository.UpdateAsync(playlist);
+        return true;
+    }
+
+    public async Task<bool> DeletePlaylistAsync(Guid id, string userId)
+    {
+        var playlist = await _repository.GetByIdAsync(id);
+        
+        if (playlist == null || playlist.UserId != userId)
+        {
+            return false;
+        }
+
+        await _repository.DeleteAsync(playlist);
+        return true;
+    }
 }

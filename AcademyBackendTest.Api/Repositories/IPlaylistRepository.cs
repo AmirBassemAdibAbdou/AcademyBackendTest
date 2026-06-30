@@ -8,4 +8,5 @@ public interface IPlaylistRepository
     Task<IEnumerable<Playlist>> GetByUserIdAsync(string userId);
     Task<Playlist?> GetByIdAsync(Guid id);
     Task UpdateAsync(Playlist playlist);
+    Task DeleteAsync(Playlist playlist);
 }

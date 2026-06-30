@@ -37,4 +37,9 @@ public class PlaylistRepository : IPlaylistRepository
         _context.Playlists.Update(playlist);
         await _context.SaveChangesAsync();
     }
+    public async Task DeleteAsync(Playlist playlist)
+    {
+        _context.Playlists.Remove(playlist);
+        await _context.SaveChangesAsync();
+    }
 }

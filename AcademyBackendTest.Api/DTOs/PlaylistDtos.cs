@@ -7,3 +7,4 @@ public record AddSongDto(string Title, string Artist, string UserId);
 public record SongResponseDto(Guid Id, string Title, string Artist);
 
 public record PlaylistResponseDto(Guid Id, string Name, string UserId, IEnumerable<SongResponseDto> Songs);
+public record UpdatePlaylistDto(string Name, string UserId);
