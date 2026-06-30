@@ -1,3 +1,5 @@
 <Solution>
   <Project Path="AcademyBackendTest.Api/AcademyBackendTest.Api.csproj" />
+  <Project Path="AcademyBackendTest.IntegrationTests/AcademyBackendTest.IntegrationTests.csproj" />
+  <Project Path="AcademyBackendTest.UnitTests/AcademyBackendTest.UnitTests.csproj" />
 </Solution>

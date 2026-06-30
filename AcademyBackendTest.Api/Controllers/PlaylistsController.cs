@@ -16,7 +16,9 @@ public class PlaylistsController : ControllerBase
     public async Task<IActionResult> CreatePlaylist([FromBody] CreatePlaylistDto dto)
     {
         var result = await _service.CreatePlaylistAsync(dto);
-        return CreatedAtAction(nameof(GetPlaylists), new { userId = result.UserId }, result);
+        
+        // Using Created() with a hardcoded route string is safer for integration tests
+        return Created($"/api/playlists/{result.UserId}", result);
     }
     
     [HttpGet("{userId}")]
